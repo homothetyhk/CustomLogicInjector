@@ -22,6 +22,7 @@ namespace CustomLogicInjector
             RCData.RuntimeLogicOverride.Subscribe(-1000f, CreateSettingsTerms);
             ProgressionInitializer.OnCreateProgressionInitializer += InitializeSettings;
             LoadFiles();
+            RandomizerMod.Logging.SettingsLog.AfterLogSettings += LogSettings;
         }
 
         public override string GetVersion()
@@ -80,6 +81,14 @@ namespace CustomLogicInjector
                     }
                 }
             }
+        }
+
+        private static void LogSettings(RandomizerMod.Logging.LogArguments arg1, TextWriter tw)
+        {
+            tw.WriteLine("Logging CustomLogicInjector settings:");
+            using JsonTextWriter jtw = new(tw) { CloseOutput = false, };
+            RandomizerMod.RandomizerData.JsonUtil._js.Serialize(jtw, GS);
+            tw.WriteLine();
         }
 
         void IGlobalSettings<GlobalSettings>.OnLoadGlobal(GlobalSettings s)
