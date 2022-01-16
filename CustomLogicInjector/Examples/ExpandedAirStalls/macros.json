@@ -1,0 +1,12 @@
+{
+	"SPELLSTALL": "FIREBALLSKIPS + (FIREBALL | SCREAM)",
+	"SLASHSTALL": "FIREBALLSKIPS + GREATSLASH + OBSCURESKIPS",
+	"CYCLONESTALL": "FIREBALLSKIPS + CYCLONE + OBSCURESKIPS",
+	"DASHREFRESH": "SPELLSTALL | SLASHSTALL | FIREBALLSKIPS + Dash_Slash | Dashmaster",
+
+	"ANYMAP": "Crossroads_Map | Greenpath_Map | Fog_Canyon_Map | Fungal_Wastes_Map | Deepnest_Map | Ancient_Basin_Map | Kingdom's_Edge_Map | City_of_Tears_Map | Royal_Waterways_Map | Howling_Cliffs_Map | Crystal_Peak_Map | Queen's_Gardens_Map | Resting_Grounds_Map",
+	"MAPSTALL": "ANYMAP + OBSCURESKIPS + MAPSTALLSALLOWED",
+	"NONSPELLSTALL": "MAPSTALL | SLASHSTALL | CYCLONESTALL",
+
+	"JUNKPIT": "GG_Waterways[door1] | (GG_Waterways[right1] + (LEFTSUPERDASH | SWIM | WINGS + LEFTDASH + MAPSTALL))"
+}

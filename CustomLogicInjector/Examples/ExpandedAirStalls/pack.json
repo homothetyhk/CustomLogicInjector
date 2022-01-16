@@ -1,0 +1,21 @@
+{
+  "Name": "Expanded Air Stalls",
+  "Settings": [
+    {
+      "MenuName": "Map Stall Skips",
+      "LogicName": "MAPSTALLSALLOWED"
+    }
+  ],
+  "Files": [
+    {
+      "FileName": "macros.json",
+      "Priority": -2.0,
+      "JsonType": "MacroEdit"
+    },
+    {
+      "FileName": "logic.json",
+      "Priority": 0.0,
+      "JsonType": "LogicEdit"
+    }
+  ]
+}
