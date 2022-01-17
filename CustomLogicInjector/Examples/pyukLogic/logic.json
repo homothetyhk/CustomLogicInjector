@@ -16,16 +16,20 @@
 		"logic": "ORIG | Ruins2_07[top1] + WINGS + (AIRSTALL | FULLCLAW) | Ruins2_07[right1] + (LEFTDASH | SWIM | (RIGHTCLAW + (LEFTCLAW | WINGS) + LEFTSUPERDASH) | WINGS + (AIRSTALL | FULLCLAW))"
 	},
 	{
+		"name": "Whispering_Root-Queens_Gardens",
+		"logic": "ORIG | Fungus3_11[left1] + DREAMNAIL + DAMAGEBOOSTS + (2MASKS + FOCUS | Mask_Shards>11) + (ENEMYPOGOS | BACKGROUNDPOGOS) + OBSCURESKIPS"
+	},
+	{
 		"name": "Rancid_Egg-Crystal_Peak_Dive_Entrance",
 		"logic": "ORIG | Mines_01[left1] + QUAKE + RIGHTCLAW + AIRSTALL"
 	},
 	{
-	  "name": "Rancid_Egg-Upper_Kingdom's_Edge",
-	  "logic": "ORIG | Deepnest_East_07[left1] + (RIGHTDASH + PRECISEMOVEMENT | LEFTDASH | LEFTSUPERDASH) + MASKSHARDS>19 + DAMAGEBOOSTS"
+		"name": "Rancid_Egg-Upper_Kingdom's_Edge",
+		"logic": "ORIG | Deepnest_East_07[left1] + (RIGHTDASH + PRECISEMOVEMENT | LEFTDASH | LEFTSUPERDASH) + MASKSHARDS>19 + DAMAGEBOOSTS"
 	},
 	{
 		"name": "Soul_Totem-Crossroads_Goam_Journal",
-		"logic": "(Crossroads_18[right1] + INFECTED | Crossroads_18[bot1] | Crossroads_18[right2]) + RIGHTCLAW + LEFTSUPERDASH + OBSCURESKIPS + PRECISEMOVEMENT"
+		"logic": "ORIG | (Crossroads_18[right1] + INFECTED | Crossroads_18[bot1] | Crossroads_18[right2]) + RIGHTCLAW + LEFTSUPERDASH + OBSCURESKIPS + PRECISEMOVEMENT"
 	},
 	{
 		"name": "Soul_Totem-Top_Left_Waterways",

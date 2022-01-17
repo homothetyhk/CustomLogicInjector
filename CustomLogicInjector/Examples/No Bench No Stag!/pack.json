@@ -1,0 +1,11 @@
+{
+  "Name": "No Bench No Stag!",
+  "Settings": null,
+  "Files": [
+    {
+      "FileName": "subst.json",
+      "Priority": -1.0,
+      "JsonType": "LogicSubst"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Can_Stag",
+    "old": "Deepnest_09[left1]",
+    "replacement": "FALSE"
+  },
+  {
+    "name": "Can_Stag",
+    "old": "Room_Town_Stag_Station[left1]",
+    "replacement": "FALSE"
+  }
+]
