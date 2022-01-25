@@ -5,7 +5,7 @@ namespace CustomLogicInjector
     public class LogicPack
     {
         public string Name;
-        public List<LogicSetting> Settings;
+        public List<LogicSetting>? Settings;
         public List<LogicFile> Files;
 
         public void Toggle(bool value)

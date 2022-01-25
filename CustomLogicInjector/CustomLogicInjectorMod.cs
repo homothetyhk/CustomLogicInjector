@@ -61,6 +61,7 @@ namespace CustomLogicInjector
             {
                 if (GS.ActivePacks.TryGetValue(pack.Name, out bool value) && value)
                 {
+                    if (pack.Settings == null) continue;
                     foreach (LogicSetting setting in pack.Settings) lmb.GetOrAddTerm(setting.LogicName);
                 }
             }
@@ -72,9 +73,10 @@ namespace CustomLogicInjector
             {
                 if (GS.ActivePacks.TryGetValue(pack.Name, out bool value) && value)
                 {
+                    if (pack.Settings == null) continue;
                     foreach (LogicSetting setting in pack.Settings)
                     {
-                        if (lm.TermLookup.TryGetValue(setting.LogicName, out Term t) && GS.ActiveSettings.TryGetValue(pack.Name, out bool flag) && flag)
+                        if (lm.TermLookup.TryGetValue(setting.LogicName, out Term t) && GS.ActiveSettings.TryGetValue(setting.LogicName, out bool flag) && flag)
                         {
                             pi.Setters.Add(new(t, 1));
                         }
