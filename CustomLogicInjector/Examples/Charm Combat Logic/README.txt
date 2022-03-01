@@ -1,0 +1,1 @@
+This is a simple example to demonstrate how to add menu settings and edit macros. This example adds logic for various charm combinations to MINIBOSS and BOSS, and defines corresponding menu settings.

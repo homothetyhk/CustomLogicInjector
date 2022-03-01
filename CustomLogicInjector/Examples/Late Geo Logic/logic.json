@@ -1,0 +1,6 @@
+[
+	{
+		"name": "Can_Replenish_Geo",
+		"logic": "ORIG + FULLCLAW + WINGS"
+	}
+]

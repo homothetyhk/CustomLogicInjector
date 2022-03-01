@@ -1,0 +1,10 @@
+{
+  "Name": "Late Geo Logic",
+  "Files": [
+    {
+      "FileName": "logic.json",
+      "Priority": 0.0,
+      "JsonType": "LogicEdit"
+    }
+  ]
+}

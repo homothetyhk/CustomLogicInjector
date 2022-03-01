@@ -1,0 +1,24 @@
+{
+  "Name": "Charm Combat Logic",
+  "Settings": [
+    {
+      "MenuName": "Glowing Womb Combat",
+      "LogicName": "GLOWINGWOMBCOMBAT"
+    },
+    {
+      "MenuName": "Level One Shaman Combat",
+      "LogicName": "LEVELONESHAMANCOMBAT"
+    },
+    {
+      "MenuName": "Strength Nail Combat",
+      "LogicName": "STRENGTHNAILCOMBAT"
+    }
+  ],
+  "Files": [
+    {
+      "FileName": "macros.json",
+      "Priority": -2.0,
+      "JsonType": "MacroEdit"
+    }
+  ]
+}

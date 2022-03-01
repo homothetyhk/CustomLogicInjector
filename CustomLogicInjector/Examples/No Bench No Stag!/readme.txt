@@ -1,1 +1,1 @@
-This is a simple example to demonstrate how to use substitution to modify only part of a complex logic string. This example deletes the branches of Can_Stag for Dirtmouth and Distant Village stations.
+This is a simple example to demonstrate how to use substitution to modify only part of a complex logic string. This example overwrites the branches of Can_Stag for Dirtmouth and Distant Village stations.

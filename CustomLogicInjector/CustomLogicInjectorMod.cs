@@ -27,7 +27,7 @@ namespace CustomLogicInjector
 
         public override string GetVersion()
         {
-            return "1.0.0";
+            return "1.0.1";
         }
 
         public static void LoadFiles()
@@ -89,7 +89,7 @@ namespace CustomLogicInjector
         {
             tw.WriteLine("Logging CustomLogicInjector settings:");
             using JsonTextWriter jtw = new(tw) { CloseOutput = false, };
-            RandomizerMod.RandomizerData.JsonUtil._js.Serialize(jtw, GS);
+            RandomizerMod.RandomizerData.JsonUtil._js.Serialize(jtw, GS.GetDisplayableSettings());
             tw.WriteLine();
         }
 

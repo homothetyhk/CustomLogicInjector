@@ -1,0 +1,1 @@
+This is a simple example to demonstrate how to edit location/transition/waypoint logic. This example adds full vertical movement to the requirements of the Can_Replenish_Geo waypoint, guaranteeing that vertical movement cannot be behind any location which costs geo.

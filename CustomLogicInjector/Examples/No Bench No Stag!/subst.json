@@ -2,11 +2,11 @@
   {
     "name": "Can_Stag",
     "old": "Deepnest_09[left1]",
-    "replacement": "FALSE"
+    "replacement": "(ITEMRANDO | MAPAREARANDO) + Deepnest_Spider_Town[left1] + (FULLCLAW | (WINGS + ANYCLAW) | (WINGS + COMPLEXSKIPS + SHADESKIPS + 4MASKS)) + Deepnest_10[right1]"
   },
   {
     "name": "Can_Stag",
     "old": "Room_Town_Stag_Station[left1]",
-    "replacement": "FALSE"
+    "replacement": "(ITEMRANDO | AREARANDO) + Town[door_station]"
   }
 ]
