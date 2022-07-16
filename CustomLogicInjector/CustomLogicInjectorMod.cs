@@ -2,10 +2,7 @@
 using Modding;
 using Newtonsoft.Json;
 using RandomizerCore.Json;
-using RandomizerCore.Logic;
 using RandomizerMod;
-using RandomizerMod.RC;
-using RandomizerMod.Settings;
 
 namespace CustomLogicInjector
 {
@@ -19,9 +16,8 @@ namespace CustomLogicInjector
         {
             MenuChangerMod.OnExitMainMenu += MenuHolder.OnExitMenu;
             RandomizerMod.Menu.RandomizerMenuAPI.AddMenuPage(MenuHolder.ConstructMenu, MenuHolder.TryGetMenuButton);
-            RCData.RuntimeLogicOverride.Subscribe(-1000f, CreateSettingsTerms);
-            ProgressionInitializer.OnCreateProgressionInitializer += InitializeSettings;
             LoadFiles();
+            LogicHookManager.Setup();
             RandomizerMod.Logging.SettingsLog.AfterLogSettings += LogSettings;
         }
 
@@ -50,36 +46,6 @@ namespace CustomLogicInjector
                     catch (Exception e)
                     {
                         LogHelper.LogError($"Error deserializing pack.json in subdirectory {di.Name}:\n{e}");
-                    }
-                }
-            }
-        }
-
-        public static void CreateSettingsTerms(GenerationSettings gs, LogicManagerBuilder lmb)
-        {
-            foreach (LogicPack pack in Packs)
-            {
-                if (GS.ActivePacks.TryGetValue(pack.Name, out bool value) && value)
-                {
-                    if (pack.Settings == null) continue;
-                    foreach (LogicSetting setting in pack.Settings) lmb.GetOrAddTerm(setting.LogicName);
-                }
-            }
-        }
-
-        public static void InitializeSettings(LogicManager lm, GenerationSettings gs, ProgressionInitializer pi)
-        {
-            foreach (LogicPack pack in Packs)
-            {
-                if (GS.ActivePacks.TryGetValue(pack.Name, out bool value) && value)
-                {
-                    if (pack.Settings == null) continue;
-                    foreach (LogicSetting setting in pack.Settings)
-                    {
-                        if (lm.TermLookup.TryGetValue(setting.LogicName, out Term t) && GS.ActiveSettings.TryGetValue(setting.LogicName, out bool flag) && flag)
-                        {
-                            pi.Setters.Add(new(t, 1));
-                        }
                     }
                 }
             }

@@ -1,6 +1,4 @@
-﻿using RandomizerMod.RC;
-
-namespace CustomLogicInjector
+﻿namespace CustomLogicInjector
 {
     public class LogicPack
     {
@@ -14,11 +12,11 @@ namespace CustomLogicInjector
 
             if (value)
             {
-                foreach (LogicFile lf in Files) RCData.RuntimeLogicOverride.Subscribe(lf.Priority, lf.Apply);
+                LogicHookManager.AddPackHook(this);
             }
             else
             {
-                foreach (LogicFile lf in Files) RCData.RuntimeLogicOverride.Unsubscribe(lf.Priority, lf.Apply);
+                LogicHookManager.RemovePackHook(this);
             }
         }
     }

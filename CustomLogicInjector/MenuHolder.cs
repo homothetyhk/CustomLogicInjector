@@ -17,7 +17,7 @@ namespace CustomLogicInjector
 
         public static void OnExitMenu()
         {
-             Instance = null;
+            Instance = null;
         }
 
         public static void ConstructMenu(MenuPage connectionsPage)
