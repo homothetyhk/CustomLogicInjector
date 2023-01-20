@@ -14,7 +14,7 @@ namespace CustomLogicInjector
             ProgressionInitializer.OnCreateProgressionInitializer += InitializeSettings;
             foreach (LogicPack pack in CustomLogicInjectorMod.Packs)
             {
-                if (CustomLogicInjectorMod.GS.ActivePacks.TryGetValue(pack.Name, out bool value) && value)
+                if (CustomLogicInjectorMod.GS.IsPackActive(pack.Name))
                 {
                     AddPackHook(pack);
                 }
@@ -33,11 +33,17 @@ namespace CustomLogicInjector
             foreach (LogicFile lf in pack.Files) RCData.RuntimeLogicOverride.Unsubscribe(lf.Priority, lf.Apply);
         }
 
+        public static void Reset()
+        {
+            foreach (LogicPack p in CustomLogicInjectorMod.Packs) RemovePackHook(p);
+            if (subscribedPacks.Count > 0) throw new InvalidOperationException("Unable to locate subscribed packs: " + string.Join(", ", subscribedPacks));
+        }
+
         public static void CreateSettingsTerms(GenerationSettings gs, LogicManagerBuilder lmb)
         {
             foreach (LogicPack pack in CustomLogicInjectorMod.Packs)
             {
-                if (CustomLogicInjectorMod.GS.ActivePacks.TryGetValue(pack.Name, out bool value) && value)
+                if (CustomLogicInjectorMod.GS.IsPackActive(pack.Name))
                 {
                     if (pack.Settings == null) continue;
                     foreach (LogicSetting setting in pack.Settings) lmb.GetOrAddTerm(setting.LogicName);
@@ -49,15 +55,13 @@ namespace CustomLogicInjector
         {
             foreach (LogicPack pack in CustomLogicInjectorMod.Packs)
             {
-                if (CustomLogicInjectorMod.GS.ActivePacks.TryGetValue(pack.Name, out bool value) && value)
+                if (CustomLogicInjectorMod.GS.IsPackActive(pack.Name))
                 {
                     if (pack.Settings == null) continue;
                     foreach (LogicSetting setting in pack.Settings)
                     {
-                        if (lm.TermLookup.TryGetValue(setting.LogicName, out Term t) && CustomLogicInjectorMod.GS.ActiveSettings.TryGetValue(setting.LogicName, out bool flag) && flag)
-                        {
-                            pi.Setters.Add(new(t, 1));
-                        }
+                        Term t = lm.GetTermStrict(setting.LogicName);
+                        pi.Setters.Add(new(t, 1));
                     }
                 }
             }

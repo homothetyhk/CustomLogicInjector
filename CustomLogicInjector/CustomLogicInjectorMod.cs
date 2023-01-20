@@ -2,7 +2,7 @@
 using Modding;
 using Newtonsoft.Json;
 using RandomizerCore.Json;
-using RandomizerMod;
+using System.Reflection;
 
 namespace CustomLogicInjector
 {
@@ -12,22 +12,29 @@ namespace CustomLogicInjector
         public static GlobalSettings GS { get; private set; } = new();
         public static readonly List<LogicPack> Packs = new();
 
+        public CustomLogicInjectorMod()
+        {
+            LoadFiles();
+        }
+
         public override void Initialize()
         {
             MenuChangerMod.OnExitMainMenu += MenuHolder.OnExitMenu;
             RandomizerMod.Menu.RandomizerMenuAPI.AddMenuPage(MenuHolder.ConstructMenu, MenuHolder.TryGetMenuButton);
-            LoadFiles();
             LogicHookManager.Setup();
             RandomizerMod.Logging.SettingsLog.AfterLogSettings += LogSettings;
+            SettingsInterop.Setup(this);
         }
 
         public override string GetVersion()
         {
-            return "1.0.2";
+            Version v = GetType().Assembly.GetName().Version;
+            return $"{v.Major}.{v.Minor}.{v.Build}";
         }
 
         public static void LoadFiles()
         {
+            Packs.Clear();
             DirectoryInfo main = new(ModDirectory);
 
             foreach (DirectoryInfo di in main.EnumerateDirectories())
@@ -40,15 +47,16 @@ namespace CustomLogicInjector
                         using StreamReader sr = new(fi.OpenRead());
                         using JsonTextReader jtr = new(sr);
                         LogicPack pack = JsonUtil.Deserialize<LogicPack>(jtr);
-                        foreach (LogicFile lf in pack.Files) lf.directoryName = di.Name;
+                        foreach (LocalLogicFile lf in pack.Files.OfType<LocalLogicFile>()) lf.directoryName = di.Name;
                         Packs.Add(pack);
                     }
                     catch (Exception e)
                     {
-                        LogHelper.LogError($"Error deserializing pack.json in subdirectory {di.Name}:\n{e}");
+                        throw new InvalidOperationException($"Error deserializing pack.json in subdirectory {di.Name}", e);
                     }
                 }
             }
+            GS.CleanData();
         }
 
         private static void LogSettings(RandomizerMod.Logging.LogArguments arg1, TextWriter tw)

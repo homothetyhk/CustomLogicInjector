@@ -7,7 +7,7 @@
 
         public void Toggle(bool value)
         {
-            CustomLogicInjectorMod.GS.ActiveSettings[LogicName] = value;
+            CustomLogicInjectorMod.GS.SetSetting(LogicName, value);
         }
     }
 }
