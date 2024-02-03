@@ -44,9 +44,7 @@ namespace CustomLogicInjector
                 {
                     try
                     {
-                        using StreamReader sr = new(fi.OpenRead());
-                        using JsonTextReader jtr = new(sr);
-                        LogicPack pack = JsonUtil.Deserialize<LogicPack>(jtr);
+                        LogicPack pack = JsonUtil.DeserializeFromStream<LogicPack>(fi.OpenRead());
                         foreach (LocalLogicFile lf in pack.Files.OfType<LocalLogicFile>()) lf.directoryName = di.Name;
                         Packs.Add(pack);
                     }

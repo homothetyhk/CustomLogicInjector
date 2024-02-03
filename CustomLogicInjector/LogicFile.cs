@@ -1,9 +1,9 @@
 ﻿using RandomizerMod.Settings;
 using RandomizerCore.Logic;
-using static RandomizerCore.Logic.LogicManagerBuilder;
+using RandomizerCore.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Modding;
+using System.Text;
 
 namespace CustomLogicInjector
 {
@@ -12,16 +12,14 @@ namespace CustomLogicInjector
     {
         public string FileName;
         public float Priority;
-        public JsonType JsonType;
-        public abstract TextReader GetReader();
+        public LogicFileType JsonType;
+        public abstract Stream GetData();
 
         public void Apply(GenerationSettings gs, LogicManagerBuilder lmb)
         {
             try
             {
-                using TextReader tr = GetReader();
-                using JsonTextReader jtr = new(tr);
-                lmb.DeserializeJson(JsonType, jtr);
+                lmb.DeserializeFile(JsonType, new JsonLogicFormat(), GetData());
             }
             catch (Exception e)
             {
@@ -71,14 +69,14 @@ namespace CustomLogicInjector
             FileName = file.FileName;
             Priority = file.Priority;
             JsonType = file.JsonType;
-            using TextReader tr = file.GetReader();
-            RawJson = tr.ReadToEnd();
+            using StreamReader sr = new(file.GetData());
+            RawJson = sr.ReadToEnd();
         }
 
         public string RawJson;
-        public override TextReader GetReader()
+        public override Stream GetData()
         {
-            return new StringReader(RawJson);
+            return new MemoryStream(Encoding.Unicode.GetBytes(RawJson));
         }
     }
 
@@ -86,10 +84,10 @@ namespace CustomLogicInjector
     {
         internal string directoryName;
 
-        public override TextReader GetReader()
+        public override Stream GetData()
         {
             string filePath = Path.Combine(CustomLogicInjectorMod.ModDirectory, directoryName, FileName);
-            return new StreamReader(File.OpenRead(filePath));
+            return File.OpenRead(filePath);
         }
     }
 }
