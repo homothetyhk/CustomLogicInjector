@@ -60,8 +60,11 @@ namespace CustomLogicInjector
                     if (pack.Settings == null) continue;
                     foreach (LogicSetting setting in pack.Settings)
                     {
-                        Term t = lm.GetTermStrict(setting.LogicName);
-                        pi.Setters.Add(new(t, 1));
+                        if (CustomLogicInjectorMod.GS.IsSettingActive(setting.LogicName))
+                        {
+                            Term t = lm.GetTermStrict(setting.LogicName);
+                            pi.Setters.Add(new(t, 1));
+                        }
                     }
                 }
             }
