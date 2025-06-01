@@ -80,13 +80,10 @@ namespace CustomLogicInjector
 
         public void ToggleAllOff()
         {
-            Logger.Log("Received toggle off request.");
             foreach (ToggleButton b in PackToggleLookup.Values)
             {
-                Logger.Log(b.Text);
                 if (b.Value)
                 {
-                    Logger.Log("!");
                     b.SetValue(false);
                 }
             }

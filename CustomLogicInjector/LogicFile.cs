@@ -3,7 +3,6 @@ using RandomizerCore.Logic;
 using RandomizerCore.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Text;
 
 namespace CustomLogicInjector
 {
@@ -76,7 +75,12 @@ namespace CustomLogicInjector
         public string RawJson;
         public override Stream GetData()
         {
-            return new MemoryStream(Encoding.Unicode.GetBytes(RawJson));
+            MemoryStream stream = new();
+            StreamWriter writer = new(stream);
+            writer.Write(RawJson);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 
